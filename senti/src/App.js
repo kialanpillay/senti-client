@@ -11,7 +11,8 @@ function App() {
         <h2 id="tag">Blazingly fast sentiment analysis.</h2>
       </header>
       <Spinner id="spinner" animation="border" />
-      <h2 id="tag">"UNDER CONSTRUCTION"</h2>
+      <h5 id="tag">UNDER CONSTRUCTION</h5>
+      <h5 id="tag">工事中</h5>
     </div>
   );
 }
