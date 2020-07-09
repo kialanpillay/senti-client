@@ -11,6 +11,7 @@ from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 from nltk import FreqDist, classify, NaiveBayesClassifier
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 app = Flask(__name__)
 api = Api(app=app, version="1.0", title="Senti Server")
@@ -119,7 +120,9 @@ def sentiment(text, classifier):
     classification = classifier.classify(
         dict([token, True] for token in text_tokens)
     )
-    return classification
+    sid = SentimentIntensityAnalyzer()
+    score = sid.polarity_scores(text)
+    return classification, score
 
 
 ###################
@@ -140,12 +143,13 @@ class Sentiment(Resource):
     @api.expect(model)
     def get(self, text):
         try:
-            classification = sentiment(text, classifier)
+            classification, score = sentiment(text, classifier)
             response = jsonify(
                 {
                     "statusCode": 200,
                     "status": "Successful",
                     "classification": classification,
+                    "score": score,
                 }
             )
             response.headers.add("Access-Control-Allow-Origin", "*")
