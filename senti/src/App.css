@@ -3,16 +3,36 @@
   background-color: white;
 }
 
+#container {
+  margin-top: 4rem;
+  width: 60%;
+}
+
 #brand {
   text-align: center;
   font-size: 10rem;
   letter-spacing: 1rem;
-  margin-top: 10rem;
+  margin-top: 6rem;
   width: 100%;
 }
 
 #tag {
   text-align: center;
+}
+
+#footer {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+#input{
+  margin-bottom: 2rem;
+}
+
+#result {
+  text-align: right;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 #spinner {

@@ -18,7 +18,7 @@ api = Api(app=app, version="1.0", title="Senti Server")
 
 model = api.model(
     "Senti Params", {"text": fields.String(
-        required=True, description="Text to Classify")}
+        required=True, description="Text to classify")}
 )
 
 ###################
@@ -133,7 +133,7 @@ print(" * Sentiment Classifier Trained")
 
 @api.route("/senti/<string:text>")
 class Sentiment(Resource):
-    def options(self):
+    def options(self, text):
         response = make_response()
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Allow-Headers", "*")
