@@ -11,9 +11,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       text: "",
-      response: [],
-      classification: "",
-      score: [],
+      response: null,
       res: false,
     };
 
@@ -34,7 +32,7 @@ export default class App extends React.Component {
       .map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(params[k]))
       .join("&");
 
-    let url = "http://127.0.0.1:5000/senti/" + query;
+    let url = "https://senti-ment-api.herokuapp.com/vader/" + query;
     fetch(url, {
       method: "GET",
       headers: {
@@ -45,17 +43,12 @@ export default class App extends React.Component {
       .then((response) => response.json())
       .then((result) => {
         this.setState({
-          response: result,
+          response: result.classification,
           res: true,
-          score: result.score,
-          classification: result.classification,
         });
       })
       .catch(function (error) {
         console.log(error);
-      })
-      .finally(() => {
-        console.log(this.state);
       });
   };
 
@@ -85,12 +78,10 @@ export default class App extends React.Component {
               </InputGroup.Append>
             </InputGroup>
           </div>
-          <h4 id="result" hidden={!this.state.res}>
-            naive bayes indicates that your text is{" "}
-            {this.state.classification.toLowerCase()}
-          </h4>
-          <h4 id="result" hidden={!this.state.res}>
-            vader says the sentiment score is {this.state.score.compound}
+          <h4 id="result">
+            {this.state.response != null
+              ? `senti says the your sentence has a ${this.state.response.classification.toLowerCase()} sentiment`
+              : null}
           </h4>
         </Container>
       </div>
