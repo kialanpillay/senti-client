@@ -80,7 +80,7 @@ export default class App extends React.Component {
           </div>
           <h4 id="result">
             {this.state.response != null
-              ? `senti says the your sentence has a ${this.state.response.classification.toLowerCase()} sentiment`
+              ? `senti says your sentence has a ${this.state.response.classification.toLowerCase()} sentiment`
               : null}
           </h4>
         </Container>
